@@ -24,10 +24,6 @@ class MainActivity : AppCompatActivity() {
     var currentImageURL: String? = null
     override fun onCreate(savedInstanceState: Bundle?) {
 
-
-
-
-
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
@@ -43,55 +39,44 @@ class MainActivity : AppCompatActivity() {
         val progressBar1 = findViewById<ProgressBar>(R.id.progressBar)
         progressBar1.visibility = View.VISIBLE
 
-
-
-
-
         // Instantiate the RequestQueue.
-
         currentImageURL = "https://meme-api.herokuapp.com/gimme"
 
         // Request a string response from the provided URL.
         val jsonObjectRequest = JsonObjectRequest(
             Request.Method.GET, currentImageURL, null,
-            Response.Listener{ response ->
-                currentImageURL = response.getString("url")
-                Glide.with(this).load(currentImageURL).
-                listener(object: RequestListener<Drawable>{
-                    override fun onLoadFailed(
-                            e: GlideException?,
-                            model: Any?,
-                            target: Target<Drawable>?,
-                            isFirstResource: Boolean
-                    ): Boolean {
+                { response ->
+                    currentImageURL = response.getString("url")
+                    Glide.with(this).load(currentImageURL).
+                    listener(object: RequestListener<Drawable>{
+                        override fun onLoadFailed(
+                                e: GlideException?,
+                                model: Any?,
+                                target: Target<Drawable>?,
+                                isFirstResource: Boolean
+                        ): Boolean {
+                            progressBar1.visibility = View.GONE
+                            return false
+                        }
 
-                        progressBar1.visibility = View.GONE
+                        override fun onResourceReady(
+                                resource: Drawable?,
+                                model: Any?,
+                                target: Target<Drawable>?,
+                                dataSource: DataSource?,
+                                isFirstResource: Boolean
+                        ): Boolean {
+                            progressBar1.visibility = View.GONE
+                            return false
+                        }
 
+                    }).into(meme)
 
-                        return false
-                    }
+                },
+                {
+                    Toast.makeText(this, "Oops! Something went wrong :(", Toast.LENGTH_LONG).show()
 
-                    override fun onResourceReady(
-                            resource: Drawable?,
-                            model: Any?,
-                            target: Target<Drawable>?,
-                            dataSource: DataSource?,
-                            isFirstResource: Boolean
-                    ): Boolean {
-
-                        progressBar1.visibility = View.GONE
-
-
-                        return false
-                    }
-
-                }).into(meme)
-
-            },
-            Response.ErrorListener{
-                Toast.makeText(this, "Oops! Something went wrong :(", Toast.LENGTH_LONG).show()
-
-            })
+                })
 
         // Add the request to the RequestQueue.
         MySingleton.MySingleton.getInstance(this).addToRequestQueue(jsonObjectRequest)
