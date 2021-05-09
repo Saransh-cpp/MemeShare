@@ -40,7 +40,7 @@ class MainActivity : AppCompatActivity() {
         progressBar1.visibility = View.VISIBLE
 
         // Instantiate the RequestQueue.
-        currentImageURL = "https://meme-api.herokuapp.com/gimme"
+        currentImageURL = "https://meme-boii.herokuapp.com/meme/100"
 
         // Request a string response from the provided URL.
         val jsonObjectRequest = JsonObjectRequest(
