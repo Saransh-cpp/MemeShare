@@ -39,39 +39,39 @@ class MemeScreen : AppCompatActivity() {
 
         // Request a string response from the provided URL.
         val jsonObjectRequest = JsonObjectRequest(
-            Request.Method.GET, currentImageURL, null,
-            { response ->
-                currentImageURL = response.getString("url")
-                Glide.with(this).load(currentImageURL).
-                listener(object: RequestListener<Drawable> {
-                    override fun onLoadFailed(
-                        e: GlideException?,
-                        model: Any?,
-                        target: Target<Drawable>?,
-                        isFirstResource: Boolean
-                    ): Boolean {
-                        progressBar.visibility = View.GONE
-                        return false
-                    }
+                Request.Method.GET, currentImageURL, null,
+                { response ->
+                    currentImageURL = response.getString("url")
+                    Glide.with(this).load(currentImageURL).listener(object : RequestListener<Drawable> {
+                        override fun onLoadFailed(
+                                e: GlideException?,
+                                model: Any?,
+                                target: Target<Drawable>?,
+                                isFirstResource: Boolean
+                        ): Boolean {
+                            progressBar.visibility = View.GONE
+                            Toast.makeText(this@MemeScreen, "Oops! Something went wrong :(", Toast.LENGTH_LONG).show()
+                            return false
+                        }
 
-                    override fun onResourceReady(
-                        resource: Drawable?,
-                        model: Any?,
-                        target: Target<Drawable>?,
-                        dataSource: DataSource?,
-                        isFirstResource: Boolean
-                    ): Boolean {
-                        progressBar.visibility = View.GONE
-                        return false
-                    }
+                        override fun onResourceReady(
+                                resource: Drawable?,
+                                model: Any?,
+                                target: Target<Drawable>?,
+                                dataSource: DataSource?,
+                                isFirstResource: Boolean
+                        ): Boolean {
+                            progressBar.visibility = View.GONE
+                            return false
+                        }
 
-                }).into(meme)
+                    }).into(meme)
 
-            },
-            {
-                Toast.makeText(this, "Oops! Something went wrong :(", Toast.LENGTH_LONG).show()
+                },
+                {
+                    Toast.makeText(this, "Oops! Something went wrong :(", Toast.LENGTH_LONG).show()
 
-            })
+                })
 
         // Add the request to the RequestQueue.
         MySingleton.MySingleton.getInstance(this).addToRequestQueue(jsonObjectRequest)
@@ -84,6 +84,7 @@ class MemeScreen : AppCompatActivity() {
         val chooser = Intent.createChooser(intent, "Share this meme using?")
         startActivity(chooser)
     }
+
     fun nextMeme(view: View) {
         loadMeme(subReddit)
     }
