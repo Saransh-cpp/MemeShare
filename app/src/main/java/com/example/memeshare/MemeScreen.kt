@@ -35,7 +35,7 @@ class MemeScreen : AppCompatActivity() {
         progressBar.visibility = View.VISIBLE
 
         // Instantiate the RequestQueue.
-        currentImageURL = "https://meme-boii.herokuapp.com/${subReddit}/50"
+        currentImageURL = "https://meme-boii.herokuapp.com/${subReddit}/30"
 
         // Request a string response from the provided URL.
         val jsonObjectRequest = JsonObjectRequest(

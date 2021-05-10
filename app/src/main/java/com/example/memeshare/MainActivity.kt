@@ -12,9 +12,15 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        val intent = Intent(this, MemeScreen::class.java)
+
         memeButton.setOnClickListener {
-            val intent = Intent(this, MemeScreen::class.java)
             intent.putExtra("APIEndpoint", "memes")
+            startActivity(intent)
+        }
+
+        dankMemesButton.setOnClickListener {
+            intent.putExtra("APIEndpoint", "dankmemes")
             startActivity(intent)
         }
 
