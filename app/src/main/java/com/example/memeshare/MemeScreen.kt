@@ -69,7 +69,8 @@ class MemeScreen : AppCompatActivity() {
 
                 },
                 {
-                    Toast.makeText(this, "Oops! Something went wrong :(", Toast.LENGTH_LONG).show()
+                    progressBar.visibility = View.GONE
+                    Toast.makeText(this, "Oops! Something went wrong :(. Please go to the next meme :D", Toast.LENGTH_LONG).show()
 
                 })
 
