@@ -19,7 +19,7 @@ import kotlinx.android.synthetic.main.activity_meme_screen.*
 
 class MemeScreen : AppCompatActivity() {
     var currentImageURL: String? = null
-    var subReddit: String? = "meme"
+    var subReddit: String? = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
