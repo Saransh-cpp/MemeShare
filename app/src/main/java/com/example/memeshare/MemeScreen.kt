@@ -50,7 +50,7 @@ class MemeScreen : AppCompatActivity() {
                                 isFirstResource: Boolean
                         ): Boolean {
                             progressBar.visibility = View.GONE
-                            Toast.makeText(this@MemeScreen, "Oops! Something went wrong :(", Toast.LENGTH_LONG).show()
+                            Toast.makeText(this@MemeScreen, "Oops! Something went wrong :(\nYou can always go to the next meme;)", Toast.LENGTH_LONG).show()
                             return false
                         }
 
@@ -70,7 +70,8 @@ class MemeScreen : AppCompatActivity() {
                 },
                 {
                     progressBar.visibility = View.GONE
-                    Toast.makeText(this, "Oops! Something went wrong :(. Please go to the next meme :D", Toast.LENGTH_LONG).show()
+                    Toast.makeText(this, "Oops! Something went wrong :(\n" +
+                            "You can always go to the next meme;)", Toast.LENGTH_LONG).show()
 
                 })
 
